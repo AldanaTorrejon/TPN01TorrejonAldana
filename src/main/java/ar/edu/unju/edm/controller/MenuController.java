@@ -1,9 +1,10 @@
 package ar.edu.unju.edm.controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ar.edu.unju.edm.model.Principal;
+import ar.edu.unju.edm.model.punto1;
 import ar.edu.unju.edm.model.punto2;
 import ar.edu.unju.edm.model.punto3;
 import ar.edu.unju.edm.model.punto4;
@@ -16,30 +17,24 @@ import ar.edu.unju.edm.model.punto10;
 import ar.edu.unju.edm.model.punto11;
 @Controller
 public class MenuController {
-	@GetMapping("/menu")
-	public String getMenu() {
-		return "index";
+	@Autowired
+	punto1 nuevoFactorial;
+	punto2 añoBisiesto;
+	@GetMapping({"/menu","/index","/principal","/"})
+	public String mostrarMenu() {
+	return "index";
 	}
 	//punto1
-	 @GetMapping("/factorial")
-	  public String getFactorialapage(@RequestParam (name = "num") int num, Model model){
-	    int Factorial=1;
-	    Principal factorPrincipal = new Principal();
-	    factorPrincipal.setNum(num);
-	    Factorial= factorPrincipal.main();
-	    model.addAttribute("Factorial", Factorial);
-	    return "puntoUno";
-	  }
-	 //punto2
-	 @GetMapping("/añoBisiesto")
-	  public String getBisiestoPage(@RequestParam (name = "num") int num, Model model){
-		 String ABisiesto;
-		 punto2 aBisiesto = new punto2();
-		 aBisiesto.setAño(num);
-		 ABisiesto = aBisiesto.Bi();
-		 model.addAttribute("ABisiesto", ABisiesto);
-		 return "puntoDos";
-	  }
+		@GetMapping("/calculoFactorial")//METODOS dentro del controler atraves de un get mapping, muchos metodos
+		public String getFactorialPage (@RequestParam (name = "num1")int num1, Model model){
+		   int resultadoF = 0;
+		   nuevoFactorial.setNum1(num1);
+		   resultadoF = nuevoFactorial.resolverFactorial();
+		   model.addAttribute("resultadoF", resultadoF);
+		   model.addAttribute("numero", num1);
+		   return "resultadoFactorial";
+	}
+
 	 //punto3
 	 @GetMapping("/parImpar")
 	  public String getParImparPage(@RequestParam (name = "num") int num,Model model){

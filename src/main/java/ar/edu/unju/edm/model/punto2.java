@@ -2,19 +2,29 @@ package ar.edu.unju.edm.model;
 import org.springframework.stereotype.Component;
 @Component
 public class punto2 {
-	int año;
-	public int getAño() {
-		return año;
+	private int anio;
+	public punto2() {
+		// TODO Auto-generated constructor stub
 	}
-	public void setAño(int año) {
-		this.año=año;
+	public punto2(int anio) {
+		super();
+		this.anio = anio;
 	}
-	public String Bi(){
-		String bisiesto="";
-		if(((año%4==0) || (año%400==0)) && (año%100!=0)){
-			bisiesto="Si es Bisiesto";
-			}else{
-		      bisiesto="No es bisiesto";
-		      }return bisiesto;
-    }
+	public int getAnio() {
+		return anio;
+	}
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
+	
+	public String calcularBisiesto () {
+		
+		if((this.anio % 4 ==0)&&(this.anio % 100 != 0 || this.anio % 400 == 0)) {
+			return "es un anio bisiesto" ;
+		}
+		else {
+			return "no es un anio bisiesto";
+		}
+		
+	}
 }
